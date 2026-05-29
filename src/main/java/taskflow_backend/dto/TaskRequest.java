@@ -1,6 +1,7 @@
 package taskflow_backend.dto;
 
 import lombok.Data;
+import taskflow_backend.entity.TaskStatus;
 
 @Data
  public class TaskRequest {
@@ -9,5 +10,5 @@ import lombok.Data;
 
     private String description;
 
-    private String status;
+    private TaskStatus status;
 }

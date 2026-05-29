@@ -1,5 +1,7 @@
 package taskflow_backend.dto;
 
+import taskflow_backend.entity.TaskStatus;
+
 public class TaskResponse {
 
     private Long id;
@@ -8,7 +10,7 @@ public class TaskResponse {
 
     private String description;
 
-    private String status;
+    private TaskStatus status;
 
     public TaskResponse() {
     }
@@ -17,7 +19,7 @@ public class TaskResponse {
             Long id,
             String title,
             String description,
-            String status
+            TaskStatus status
     ) {
         this.id = id;
         this.title = title;
@@ -49,11 +51,11 @@ public class TaskResponse {
         this.description = description;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 }

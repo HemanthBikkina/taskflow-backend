@@ -27,5 +27,10 @@ public class AuthController {
 
         return authService.login(request);
     }
+    @GetMapping("/error-test")
+    public String errorTest() {
+
+        throw new RuntimeException("Testing Exception Handler");
+    }
 
 }

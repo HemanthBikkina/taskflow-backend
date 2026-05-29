@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-
     public Map<String, String> handleValidationExceptions(
             MethodArgumentNotValidException ex
     ) {
@@ -22,7 +21,6 @@ public class GlobalExceptionHandler {
         ex.getBindingResult()
                 .getFieldErrors()
                 .forEach(error -> {
-
                     errors.put(
                             error.getField(),
                             error.getDefaultMessage()
@@ -30,5 +28,18 @@ public class GlobalExceptionHandler {
                 });
 
         return errors;
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleRuntimeException(
+            RuntimeException ex
+    ) {
+
+        Map<String, String> error = new HashMap<>();
+
+        error.put("message", ex.getMessage());
+
+        return error;
     }
 }
