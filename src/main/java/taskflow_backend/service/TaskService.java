@@ -49,7 +49,9 @@ public class TaskService {
                         task.getId(),
                         task.getTitle(),
                         task.getDescription(),
-                        task.getStatus()
+                        task.getStatus(),
+                        task.getCreatedAt(),
+                        task.getUpdatedAt()
                 ))
                 .collect(Collectors.toList());
     }
@@ -75,7 +77,9 @@ public class TaskService {
                 updatedTask.getId(),
                 updatedTask.getTitle(),
                 updatedTask.getDescription(),
-                updatedTask.getStatus()
+                updatedTask.getStatus(),
+                updatedTask.getCreatedAt(),
+                updatedTask.getUpdatedAt()
         );
     }
     public String deleteTask(Long taskId, String email) {

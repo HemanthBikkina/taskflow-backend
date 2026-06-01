@@ -1,6 +1,7 @@
 package taskflow_backend.dto;
 
 import taskflow_backend.entity.TaskStatus;
+import java.time.LocalDateTime;
 
 public class TaskResponse {
 
@@ -11,6 +12,8 @@ public class TaskResponse {
     private String description;
 
     private TaskStatus status;
+    private  LocalDateTime createdAt;
+    private  LocalDateTime updatedAt;
 
     public TaskResponse() {
     }
@@ -19,12 +22,16 @@ public class TaskResponse {
             Long id,
             String title,
             String description,
-            TaskStatus status
+            TaskStatus status,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
     ) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -57,5 +64,17 @@ public class TaskResponse {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+    public  LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    public  LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+            this.updatedAt = updatedAt;
     }
 }
