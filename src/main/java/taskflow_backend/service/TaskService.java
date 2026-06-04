@@ -1,6 +1,7 @@
 package taskflow_backend.service;
-
+import org.springframework.data.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import taskflow_backend.dto.TaskResponse;
 import java.util.stream.Collectors;
@@ -38,12 +39,13 @@ public class TaskService {
 
         return "Task Created Successfully";
     }
-    public List<TaskResponse> getUserTasks(String email) {
+    public List<TaskResponse> getUserTasks(String email,int page ,int size,String sort) {
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
 
-        List<Task> tasks=taskRepository.findByUser(user);
+        Page<Task> tasks=taskRepository.findByUser(user,pageable);
         return tasks.stream()
                 .map(task -> new TaskResponse(
                         task.getId(),

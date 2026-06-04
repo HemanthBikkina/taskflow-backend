@@ -30,9 +30,10 @@ public class TaskController {
         return taskService.createTask(request, email);
     }
     @GetMapping
-    public List<TaskResponse> getTasks(Authentication authentication) {
+    public List<TaskResponse> getTasks(Authentication authentication, @RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "5") int size,@RequestParam(defaultValue = "id") String sort) {
         String email = authentication.getName();
-        return taskService.getUserTasks(email);
+        return taskService.getUserTasks(email, page, size,sort);
     }
     @PutMapping("/{id}")
     public TaskResponse updateTask(
