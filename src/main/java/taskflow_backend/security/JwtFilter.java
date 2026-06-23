@@ -7,19 +7,25 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import taskflow_backend.entity.User;
+import taskflow_backend.repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Override
@@ -50,15 +56,23 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = authHeader.substring(7);
 
         String email = jwtService.extractEmail(token);
+        User user = userRepository.findByEmail(email)
+                .orElse(null);
 
         if (email != null &&
-                SecurityContextHolder.getContext().getAuthentication() == null) {
+                user != null &&
+                SecurityContextHolder.getContext().getAuthentication() == null)
+        {
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
                             email,
                             null,
-                            Collections.emptyList()
+                            List.of(
+                                    new SimpleGrantedAuthority(
+                                            "ROLE_" + user.getRole().name()
+                                    )
+                            )
                     );
 
             authentication.setDetails(

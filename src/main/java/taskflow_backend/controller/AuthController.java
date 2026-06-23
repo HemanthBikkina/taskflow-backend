@@ -1,6 +1,7 @@
 package taskflow_backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import taskflow_backend.dto.RegisterRequest;
 import taskflow_backend.service.AuthService;
@@ -32,5 +33,6 @@ public class AuthController {
 
         throw new RuntimeException("Testing Exception Handler");
     }
+
 
 }

@@ -56,4 +56,14 @@ public class TaskController {
 
         return taskService.deleteTask(id, email);
     }
+    @GetMapping("/role")
+    public String getRole(Authentication authentication) {
+
+        return authentication.getAuthorities().toString();
+    }
+    @GetMapping("/admin")
+    public String asminOnly()
+    {
+        return "Welcome admin";
+    }
 }

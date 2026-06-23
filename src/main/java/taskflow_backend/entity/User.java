@@ -2,6 +2,9 @@ package taskflow_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import taskflow_backend.entity.UserRole;
 
 @Entity
 @Table(name = "users")
@@ -19,5 +22,6 @@ public class User {
 
     private String password;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }

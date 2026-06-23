@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import taskflow_backend.dto.RegisterRequest;
 import taskflow_backend.entity.User;
+import taskflow_backend.entity.UserRole;
 import taskflow_backend.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import taskflow_backend.dto.LoginRequest;
@@ -22,7 +23,7 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        user.setRole("EMPLOYEE");
+        user.setRole(UserRole.EMPLOYEE);
 
         userRepository.save(user);
 
