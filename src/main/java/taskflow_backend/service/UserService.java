@@ -1,10 +1,11 @@
 package taskflow_backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import taskflow_backend.dto.UserResponse;
 import taskflow_backend.entity.User;
 import taskflow_backend.repository.UserRepository;
-
+@Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
